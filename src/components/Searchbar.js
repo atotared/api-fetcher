@@ -3,9 +3,11 @@ import React from "react";
 class Searchbar extends React.Component {
   state = { term: "" };
 
-  onFormSubmit(e) {
-    e.preventDefault();
-  }
+  // By using an arrow function, the value of this keyword is binded to the Class / instance of the Class
+  onFormSubmit = (e) => {
+    e.preventDefault(this.state.term); // Without arrow function, this keyword would be undefined
+    console.log();
+  };
 
   render() {
     return (
