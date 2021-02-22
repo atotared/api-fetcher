@@ -5,8 +5,8 @@ class Searchbar extends React.Component {
 
   // By using an arrow function, the value of this keyword is binded to the Class / instance of the Class
   onFormSubmit = (e) => {
-    e.preventDefault(this.state.term); // Without arrow function, this keyword would be undefined
-    console.log();
+    e.preventDefault(); // Without arrow function, this keyword would be undefined
+    this.props.onSubmit(this.state.term); // This is passed from App class component
   };
 
   render() {
