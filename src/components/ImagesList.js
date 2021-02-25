@@ -1,13 +1,16 @@
 import React from "react";
+import ImageCard from "./ImageCard";
+
+import "./ImageList.css";
 
 const ImagesList = (props) => {
   console.log(props);
-  const images = props.images.map(({ id, description, urls: { regular } }) => {
-    // Use destructuring to avoid using image.id, image.description, etc. inside curly braces below
-    return <img key={id} alt={description} src={regular}></img>;
+  // ImageList (parent) passes props to ImageCard (child) => See ImageCard
+  const images = props.images.map((image) => {
+    return <ImageCard key={image.id} image={image} />;
   });
 
-  return <div>{images}</div>;
+  return <div className="image-list">{images}</div>;
 };
 
 export default ImagesList;
