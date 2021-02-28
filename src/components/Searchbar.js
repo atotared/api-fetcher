@@ -6,7 +6,8 @@ class Searchbar extends React.Component {
   // By using an arrow function, the value of this keyword is binded to the Class / instance of the Class
   onFormSubmit = (e) => {
     e.preventDefault(); // Without arrow function, this keyword would be undefined
-    this.props.onSubmit(this.state.term); // This is passed from App class component (onSearchSubmit);
+    console.log("THIS", this);
+    this.props.onSubmit(this.state.term); // (onSearchSubmit) is passed from App class component; *1* => equals to onSearchSubmit(this.state.term) because - this.props.onSubmit - contains the async fetch function
   };
 
   render() {
