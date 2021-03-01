@@ -3,12 +3,19 @@ import React from "react";
 class ImageCard extends React.Component {
   constructor(props) {
     super(props);
-    this.ImageRef = React.createRef(); // React relies on createRef() to access DOM elements
+    this.state = { spans: 0 };
+    this.imageRef = React.createRef(); // React relies on createRef() to access DOM elements
   }
 
+  // As images are still loading, the returned height without event listener would be 0
   componentDidMount() {
-    console.log(this);
+    this.imageRef.current.addEventListener("load", this.setSpans);
   }
+  setSpans = () => {
+    const height = this.imageRef.current.clientHeight;
+    const gridSpans = Math.ceil(height / 10);
+    this.setState({ span: gridSpans });
+  };
 
   render() {
     console.log(this.props);
@@ -18,9 +25,9 @@ class ImageCard extends React.Component {
       urls: { regular },
     } = this.props.image;
     return (
-      <div>
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
         {/* ImageCard (child) receives props from ImageList (parent) and it's able to access their properties */}
-        <img alt={description} src={regular}></img>
+        <img ref={this.imageRef} alt={description} src={regular}></img>
       </div>
     );
   }
